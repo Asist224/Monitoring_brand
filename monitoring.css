@@ -4535,3 +4535,82 @@ td[data-contact="true"] {
         display: none !important;
     }
 }
+
+/* ====================================================
+   СТИЛИ ДЛЯ БРЕНДИРОВАНИЯ
+   ==================================================== */
+
+.monitoring-branding {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 10;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.monitoring-branding:hover {
+    opacity: 1;
+}
+
+.monitoring-branding-logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.monitoring-branding-logo svg {
+    width: 100%;
+    height: 100%;
+}
+
+.monitoring-branding-icon {
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.monitoring-branding-image {
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+.monitoring-branding-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.2;
+}
+
+.monitoring-branding-powered {
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+.monitoring-branding-company {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Позиционирование для контейнера пагинации */
+.pagination {
+    position: relative;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .monitoring-branding {
+        bottom: 5px;
+        right: 5px;
+        padding: 6px 10px;
+        gap: 6px;
+    }
+
+    .monitoring-branding-text {
+        font-size: 10px !important;
+    }
+}

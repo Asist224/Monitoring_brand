@@ -783,6 +783,20 @@ const MonitoringConfig = {
     "theme": {
         "mode": "dark"
     },
+    "branding": {
+        "enabled": true,
+        "logoType": "svg",
+        "logoSvg": "<svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n            <circle cx=\"16\" cy=\"16\" r=\"15\" fill=\"url(#brandGrad1)\" opacity=\"0.12\"/>\n            <g transform=\"translate(8, 8)\">\n                <circle cx=\"8\" cy=\"8\" r=\"2.2\" fill=\"url(#brandGrad1)\"/>\n                <circle cx=\"2\" cy=\"4\" r=\"1.3\" fill=\"url(#brandGrad2)\"/>\n                <circle cx=\"14\" cy=\"4\" r=\"1.3\" fill=\"url(#brandGrad2)\"/>\n                <circle cx=\"2\" cy=\"12\" r=\"1.3\" fill=\"url(#brandGrad2)\"/>\n                <circle cx=\"14\" cy=\"12\" r=\"1.3\" fill=\"url(#brandGrad2)\"/>\n                <circle cx=\"8\" cy=\"1\" r=\"1.3\" fill=\"url(#brandGrad2)\"/>\n                <circle cx=\"8\" cy=\"15\" r=\"1.3\" fill=\"url(#brandGrad2)\"/>\n                <line x1=\"8\" y1=\"8\" x2=\"2\" y2=\"4\" stroke=\"url(#brandGrad1)\" stroke-width=\"0.8\" opacity=\"0.7\"/>\n                <line x1=\"8\" y1=\"8\" x2=\"14\" y2=\"4\" stroke=\"url(#brandGrad1)\" stroke-width=\"0.8\" opacity=\"0.7\"/>\n                <line x1=\"8\" y1=\"8\" x2=\"2\" y2=\"12\" stroke=\"url(#brandGrad1)\" stroke-width=\"0.8\" opacity=\"0.7\"/>\n                <line x1=\"8\" y1=\"8\" x2=\"14\" y2=\"12\" stroke=\"url(#brandGrad1)\" stroke-width=\"0.8\" opacity=\"0.7\"/>\n                <line x1=\"8\" y1=\"8\" x2=\"8\" y2=\"1\" stroke=\"url(#brandGrad1)\" stroke-width=\"0.8\" opacity=\"0.7\"/>\n                <line x1=\"8\" y1=\"8\" x2=\"8\" y2=\"15\" stroke=\"url(#brandGrad1)\" stroke-width=\"0.8\" opacity=\"0.7\"/>\n            </g>\n            <defs>\n                <linearGradient id=\"brandGrad1\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\">\n                    <stop offset=\"0%\" style=\"stop-color:#6366f1\"/>\n                    <stop offset=\"100%\" style=\"stop-color:#8b5cf6\"/>\n                </linearGradient>\n                <linearGradient id=\"brandGrad2\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\">\n                    <stop offset=\"0%\" style=\"stop-color:#3b82f6\"/>\n                    <stop offset=\"100%\" style=\"stop-color:#6366f1\"/>\n                </linearGradient>\n            </defs>\n        </svg>",
+        "icon": "🤖",
+        "imageUrl": "",
+        "companyName": "NexusMindAI",
+        "poweredByText": "Powered by",
+        "size": {
+            "logoWidth": 32,
+            "logoHeight": 32,
+            "fontSize": 12
+        }
+    },
     "technical": {
         "refreshInterval": 30000,
         "itemsPerPage": 10,

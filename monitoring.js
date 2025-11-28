@@ -1496,6 +1496,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     const theme = MonitoringConfig.theme.mode || 'light';
     document.documentElement.setAttribute('data-theme', theme);
     updateThemeIcon(theme);
+
+    // Создаем элемент брендирования
+    createBrandingElement();
+
     // Синхронизируем время при загрузке
     await syncServerTime();
     
@@ -7425,7 +7429,78 @@ function calculateByType(highlights) {
     return byType;
 }
 
+// =====================================================
+// ФУНКЦИЯ ДЛЯ СОЗДАНИЯ БРЕНДИРОВАНИЯ
+// =====================================================
+
+/**
+ * Создает элемент брендирования в правом нижнем углу таблицы пользователей
+ */
+function createBrandingElement() {
+    // Проверяем, включено ли брендирование
+    if (!MonitoringConfig.branding || !MonitoringConfig.branding.enabled) {
+        return;
+    }
+
+    const branding = MonitoringConfig.branding;
+
+    // Удаляем старый элемент брендирования, если он существует
+    const existingBranding = document.querySelector('.monitoring-branding');
+    if (existingBranding) {
+        existingBranding.remove();
+    }
+
+    // Создаем контейнер для брендирования
+    const brandingContainer = document.createElement('div');
+    brandingContainer.className = 'monitoring-branding';
+
+    // Создаем HTML для логотипа
+    let logoHtml = '';
+    if (branding.logoType === 'svg' && branding.logoSvg) {
+        const logoSize = branding.size || {};
+        const width = logoSize.logoWidth || 32;
+        const height = logoSize.logoHeight || 32;
+        logoHtml = `<div class="monitoring-branding-logo" style="width: ${width}px; height: ${height}px;">${branding.logoSvg}</div>`;
+    } else if (branding.logoType === 'icon' && branding.icon) {
+        const logoSize = branding.size || {};
+        const height = logoSize.logoHeight || 32;
+        logoHtml = `<div class="monitoring-branding-icon" style="font-size: ${height}px;">${branding.icon}</div>`;
+    } else if (branding.logoType === 'image' && branding.imageUrl) {
+        const logoSize = branding.size || {};
+        const width = logoSize.logoWidth || 32;
+        const height = logoSize.logoHeight || 32;
+        logoHtml = `<img src="${branding.imageUrl}" class="monitoring-branding-image" style="width: ${width}px; height: ${height}px;" alt="Logo" />`;
+    }
+
+    // Создаем HTML для текста
+    const fontSize = (branding.size && branding.size.fontSize) || 12;
+    const companyName = branding.companyName || 'NexusMindAI';
+    const poweredByText = branding.poweredByText || 'Powered by';
+
+    brandingContainer.innerHTML = `
+        ${logoHtml}
+        <div class="monitoring-branding-text" style="font-size: ${fontSize}px;">
+            ${poweredByText ? `<div class="monitoring-branding-powered">${poweredByText}</div>` : ''}
+            <div class="monitoring-branding-company">${companyName}</div>
+        </div>
+    `;
+
+    // Находим контейнер пагинации и добавляем брендирование
+    const paginationContainer = document.querySelector('.pagination');
+    if (paginationContainer) {
+        paginationContainer.appendChild(brandingContainer);
+    } else {
+        // Если контейнера пагинации нет, пытаемся добавить в конец таблицы
+        const tableContainer = document.querySelector('.table-container');
+        if (tableContainer) {
+            tableContainer.appendChild(brandingContainer);
+        }
+    }
+}
+
 // Экспортируем функцию в глобальную область
 window.toggleBANT = toggleBANT;
 // Экспортируем функцию в глобальную область
 window.updateUIFromConfig = updateUIFromConfig;
+// Экспортируем функцию создания брендирования
+window.createBrandingElement = createBrandingElement;
