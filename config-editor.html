@@ -3423,6 +3423,183 @@ if (typeof MonitoringConfig === 'undefined') {
     };
 }
 
+// Функции брендирования (определены до использования)
+window.updateBrandingTypeFields = function() {
+    const logoType = document.getElementById('brandingLogoType').value;
+    const svgField = document.getElementById('brandingSvgField');
+    const iconField = document.getElementById('brandingIconField');
+    const imageField = document.getElementById('brandingImageField');
+
+    // Скрываем все поля
+    svgField.style.display = 'none';
+    iconField.style.display = 'none';
+    imageField.style.display = 'none';
+
+    // Показываем нужное поле
+    if (logoType === 'svg') {
+        svgField.style.display = 'block';
+    } else if (logoType === 'icon') {
+        iconField.style.display = 'block';
+    } else if (logoType === 'image') {
+        imageField.style.display = 'block';
+    }
+}
+
+window.updateBrandingPreview = function() {
+    const enabled = document.getElementById('brandingEnabled')?.checked || false;
+    const logoType = document.getElementById('brandingLogoType')?.value || 'svg';
+    const logoSvg = document.getElementById('brandingLogoSvg')?.value || '';
+    const icon = document.getElementById('brandingIcon')?.value || '🤖';
+    const imageUrl = document.getElementById('brandingImageUrl')?.value || '';
+    const companyName = document.getElementById('brandingCompanyName')?.value || 'NexusMindAI';
+    const poweredByText = document.getElementById('brandingPoweredByText')?.value || 'Powered by';
+    const logoWidth = document.getElementById('brandingLogoWidth')?.value || 32;
+    const logoHeight = document.getElementById('brandingLogoHeight')?.value || 32;
+    const fontSize = document.getElementById('brandingFontSize')?.value || 12;
+
+    const previewLight = document.getElementById('brandingPreviewLight');
+    const previewDark = document.getElementById('brandingPreviewDark');
+
+    if (!enabled || !previewLight || !previewDark) {
+        if (previewLight) previewLight.innerHTML = '<div style="text-align: center; color: #9ca3af;">Брендирование отключено</div>';
+        if (previewDark) previewDark.innerHTML = '<div style="text-align: center; color: #6b7280;">Брендирование отключено</div>';
+        return;
+    }
+
+    // Создаем HTML для логотипа
+    let logoHtml = '';
+    if (logoType === 'svg' && logoSvg) {
+        logoHtml = `<div style="width: ${logoWidth}px; height: ${logoHeight}px; flex-shrink: 0;">${logoSvg}</div>`;
+    } else if (logoType === 'icon' && icon) {
+        logoHtml = `<div style="font-size: ${logoHeight}px; line-height: 1; flex-shrink: 0;">${icon}</div>`;
+    } else if (logoType === 'image' && imageUrl) {
+        logoHtml = `<img src="${imageUrl}" style="width: ${logoWidth}px; height: ${logoHeight}px; object-fit: contain; flex-shrink: 0;" />`;
+    }
+
+    // Светлая тема
+    const lightHtml = `
+        <div style="display: flex; align-items: center; gap: 8px; font-size: ${fontSize}px;">
+            ${logoHtml}
+            <div style="display: flex; flex-direction: column; gap: 2px;">
+                ${poweredByText ? `<div style="color: #6b7280; font-size: ${fontSize - 2}px;">${poweredByText}</div>` : ''}
+                <div style="color: #1f2937; font-weight: 600;">${companyName}</div>
+            </div>
+        </div>
+    `;
+
+    // Темная тема
+    const darkHtml = `
+        <div style="display: flex; align-items: center; gap: 8px; font-size: ${fontSize}px;">
+            ${logoHtml}
+            <div style="display: flex; flex-direction: column; gap: 2px;">
+                ${poweredByText ? `<div style="color: #9ca3af; font-size: ${fontSize - 2}px;">${poweredByText}</div>` : ''}
+                <div style="color: #f3f4f6; font-weight: 600;">${companyName}</div>
+            </div>
+        </div>
+    `;
+
+    previewLight.innerHTML = lightHtml;
+    previewDark.innerHTML = darkHtml;
+}
+
+window.loadBrandingSettings = function() {
+    if (!currentConfig.branding) {
+        currentConfig.branding = {
+            enabled: true,
+            logoType: 'svg',
+            logoSvg: '',
+            icon: '🤖',
+            imageUrl: '',
+            companyName: 'NexusMindAI',
+            poweredByText: 'Powered by',
+            size: {
+                logoWidth: 32,
+                logoHeight: 32,
+                fontSize: 12
+            }
+        };
+    }
+
+    const branding = currentConfig.branding;
+
+    // Загружаем значения в поля
+    const brandingEnabled = document.getElementById('brandingEnabled');
+    if (brandingEnabled) brandingEnabled.checked = branding.enabled || false;
+
+    const brandingLogoType = document.getElementById('brandingLogoType');
+    if (brandingLogoType) brandingLogoType.value = branding.logoType || 'svg';
+
+    const brandingLogoSvg = document.getElementById('brandingLogoSvg');
+    if (brandingLogoSvg) brandingLogoSvg.value = branding.logoSvg || '';
+
+    const brandingIcon = document.getElementById('brandingIcon');
+    if (brandingIcon) brandingIcon.value = branding.icon || '🤖';
+
+    const brandingImageUrl = document.getElementById('brandingImageUrl');
+    if (brandingImageUrl) brandingImageUrl.value = branding.imageUrl || '';
+
+    const brandingCompanyName = document.getElementById('brandingCompanyName');
+    if (brandingCompanyName) brandingCompanyName.value = branding.companyName || 'NexusMindAI';
+
+    const brandingPoweredByText = document.getElementById('brandingPoweredByText');
+    if (brandingPoweredByText) brandingPoweredByText.value = branding.poweredByText || 'Powered by';
+
+    if (branding.size) {
+        const brandingLogoWidth = document.getElementById('brandingLogoWidth');
+        if (brandingLogoWidth) brandingLogoWidth.value = branding.size.logoWidth || 32;
+
+        const brandingLogoHeight = document.getElementById('brandingLogoHeight');
+        if (brandingLogoHeight) brandingLogoHeight.value = branding.size.logoHeight || 32;
+
+        const brandingFontSize = document.getElementById('brandingFontSize');
+        if (brandingFontSize) brandingFontSize.value = branding.size.fontSize || 12;
+    }
+
+    // Обновляем отображение полей и превью
+    updateBrandingTypeFields();
+    updateBrandingPreview();
+}
+
+window.saveBrandingSettings = function() {
+    if (!currentConfig.branding) {
+        currentConfig.branding = {};
+    }
+
+    const brandingEnabled = document.getElementById('brandingEnabled');
+    if (brandingEnabled) currentConfig.branding.enabled = brandingEnabled.checked;
+
+    const brandingLogoType = document.getElementById('brandingLogoType');
+    if (brandingLogoType) currentConfig.branding.logoType = brandingLogoType.value;
+
+    const brandingLogoSvg = document.getElementById('brandingLogoSvg');
+    if (brandingLogoSvg) currentConfig.branding.logoSvg = brandingLogoSvg.value;
+
+    const brandingIcon = document.getElementById('brandingIcon');
+    if (brandingIcon) currentConfig.branding.icon = brandingIcon.value;
+
+    const brandingImageUrl = document.getElementById('brandingImageUrl');
+    if (brandingImageUrl) currentConfig.branding.imageUrl = brandingImageUrl.value;
+
+    const brandingCompanyName = document.getElementById('brandingCompanyName');
+    if (brandingCompanyName) currentConfig.branding.companyName = brandingCompanyName.value;
+
+    const brandingPoweredByText = document.getElementById('brandingPoweredByText');
+    if (brandingPoweredByText) currentConfig.branding.poweredByText = brandingPoweredByText.value;
+
+    if (!currentConfig.branding.size) {
+        currentConfig.branding.size = {};
+    }
+
+    const brandingLogoWidth = document.getElementById('brandingLogoWidth');
+    if (brandingLogoWidth) currentConfig.branding.size.logoWidth = parseInt(brandingLogoWidth.value) || 32;
+
+    const brandingLogoHeight = document.getElementById('brandingLogoHeight');
+    if (brandingLogoHeight) currentConfig.branding.size.logoHeight = parseInt(brandingLogoHeight.value) || 32;
+
+    const brandingFontSize = document.getElementById('brandingFontSize');
+    if (brandingFontSize) currentConfig.branding.size.fontSize = parseInt(brandingFontSize.value) || 12;
+}
+
 // Текущая конфигурация
 let currentConfig = JSON.parse(JSON.stringify(MonitoringConfig));
 
@@ -3692,13 +3869,12 @@ if (analysisLangSyncToggle && currentConfig.analysisLanguageSync) {
         crmEnabled.checked = currentConfig.crmIntegration.enabled || false;
          // Добавляем обработчик изменения
         crmEnabled.addEventListener('change', toggleCRMSections);
-        
+
         // Вызываем функцию для правильного отображения
         toggleCRMSections();
     }
-}
 
-// Email мониторинг
+    // Email мониторинг
     const emailToggle = document.getElementById('emailMonitoringToggle');
     if (emailToggle && currentConfig.emailMonitoring) {
         if (currentConfig.emailMonitoring.enabled) {
