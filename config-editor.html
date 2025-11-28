@@ -931,8 +931,14 @@
             </div>
 
             <div class="form-group">
+                <label>Ссылка на сайт компании (опционально):</label>
+                <input type="url" id="brandingCompanyUrl" class="form-control" placeholder="https://example.com" oninput="updateBrandingPreview()">
+                <small style="color: #6b7280;">Если указана, название компании станет кликабельной ссылкой</small>
+            </div>
+
+            <div class="form-group">
                 <label>Текст "Powered by" (опционально):</label>
-                <input type="text" id="brandingPoweredByText" class="form-control" placeholder="Powered by" oninput="updateBrandingPreview()">
+                <input type="text" id="brandingPoweredByText" class="form-control" placeholder="" oninput="updateBrandingPreview()">
                 <small style="color: #6b7280;">Текст перед названием компании. Оставьте пустым, чтобы не отображать</small>
             </div>
 
@@ -3452,7 +3458,8 @@ window.updateBrandingPreview = function() {
     const icon = document.getElementById('brandingIcon')?.value || '🤖';
     const imageUrl = document.getElementById('brandingImageUrl')?.value || '';
     const companyName = document.getElementById('brandingCompanyName')?.value || 'NexusMindAI';
-    const poweredByText = document.getElementById('brandingPoweredByText')?.value || 'Powered by';
+    const companyUrl = (document.getElementById('brandingCompanyUrl')?.value || '').trim();
+    const poweredByText = (document.getElementById('brandingPoweredByText')?.value || '').trim();
     const logoWidth = document.getElementById('brandingLogoWidth')?.value || 32;
     const logoHeight = document.getElementById('brandingLogoHeight')?.value || 32;
     const fontSize = document.getElementById('brandingFontSize')?.value || 12;
@@ -3476,13 +3483,22 @@ window.updateBrandingPreview = function() {
         logoHtml = `<img src="${imageUrl}" style="width: ${logoWidth}px; height: ${logoHeight}px; object-fit: contain; flex-shrink: 0;" />`;
     }
 
+    // Генерируем HTML для названия компании (с ссылкой или без)
+    const companyNameLightHTML = companyUrl ?
+        `<a href="${companyUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #1f2937; font-weight: 600;">${companyName}</a>` :
+        `<div style="color: #1f2937; font-weight: 600;">${companyName}</div>`;
+
+    const companyNameDarkHTML = companyUrl ?
+        `<a href="${companyUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #f3f4f6; font-weight: 600;">${companyName}</a>` :
+        `<div style="color: #f3f4f6; font-weight: 600;">${companyName}</div>`;
+
     // Светлая тема
     const lightHtml = `
         <div style="display: flex; align-items: center; gap: 8px; font-size: ${fontSize}px;">
             ${logoHtml}
             <div style="display: flex; flex-direction: column; gap: 2px;">
                 ${poweredByText ? `<div style="color: #6b7280; font-size: ${fontSize - 2}px;">${poweredByText}</div>` : ''}
-                <div style="color: #1f2937; font-weight: 600;">${companyName}</div>
+                ${companyNameLightHTML}
             </div>
         </div>
     `;
@@ -3493,7 +3509,7 @@ window.updateBrandingPreview = function() {
             ${logoHtml}
             <div style="display: flex; flex-direction: column; gap: 2px;">
                 ${poweredByText ? `<div style="color: #9ca3af; font-size: ${fontSize - 2}px;">${poweredByText}</div>` : ''}
-                <div style="color: #f3f4f6; font-weight: 600;">${companyName}</div>
+                ${companyNameDarkHTML}
             </div>
         </div>
     `;
@@ -3511,7 +3527,8 @@ window.loadBrandingSettings = function() {
             icon: '🤖',
             imageUrl: '',
             companyName: 'NexusMindAI',
-            poweredByText: 'Powered by',
+            companyUrl: '',
+            poweredByText: '',
             size: {
                 logoWidth: 32,
                 logoHeight: 32,
@@ -3541,8 +3558,11 @@ window.loadBrandingSettings = function() {
     const brandingCompanyName = document.getElementById('brandingCompanyName');
     if (brandingCompanyName) brandingCompanyName.value = branding.companyName || 'NexusMindAI';
 
+    const brandingCompanyUrl = document.getElementById('brandingCompanyUrl');
+    if (brandingCompanyUrl) brandingCompanyUrl.value = branding.companyUrl || '';
+
     const brandingPoweredByText = document.getElementById('brandingPoweredByText');
-    if (brandingPoweredByText) brandingPoweredByText.value = branding.poweredByText || 'Powered by';
+    if (brandingPoweredByText) brandingPoweredByText.value = branding.poweredByText || '';
 
     if (branding.size) {
         const brandingLogoWidth = document.getElementById('brandingLogoWidth');
@@ -3582,6 +3602,9 @@ window.saveBrandingSettings = function() {
 
     const brandingCompanyName = document.getElementById('brandingCompanyName');
     if (brandingCompanyName) currentConfig.branding.companyName = brandingCompanyName.value;
+
+    const brandingCompanyUrl = document.getElementById('brandingCompanyUrl');
+    if (brandingCompanyUrl) currentConfig.branding.companyUrl = brandingCompanyUrl.value;
 
     const brandingPoweredByText = document.getElementById('brandingPoweredByText');
     if (brandingPoweredByText) currentConfig.branding.poweredByText = brandingPoweredByText.value;
@@ -5019,7 +5042,8 @@ window.updateBrandingPreview = function() {
     const icon = document.getElementById('brandingIcon')?.value || '🤖';
     const imageUrl = document.getElementById('brandingImageUrl')?.value || '';
     const companyName = document.getElementById('brandingCompanyName')?.value || 'NexusMindAI';
-    const poweredByText = document.getElementById('brandingPoweredByText')?.value || 'Powered by';
+    const companyUrl = (document.getElementById('brandingCompanyUrl')?.value || '').trim();
+    const poweredByText = (document.getElementById('brandingPoweredByText')?.value || '').trim();
     const logoWidth = document.getElementById('brandingLogoWidth')?.value || 32;
     const logoHeight = document.getElementById('brandingLogoHeight')?.value || 32;
     const fontSize = document.getElementById('brandingFontSize')?.value || 12;
@@ -5043,13 +5067,22 @@ window.updateBrandingPreview = function() {
         logoHtml = `<img src="${imageUrl}" style="width: ${logoWidth}px; height: ${logoHeight}px; object-fit: contain; flex-shrink: 0;" />`;
     }
 
+    // Генерируем HTML для названия компании (с ссылкой или без)
+    const companyNameLightHTML = companyUrl ?
+        `<a href="${companyUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #1f2937; font-weight: 600;">${companyName}</a>` :
+        `<div style="color: #1f2937; font-weight: 600;">${companyName}</div>`;
+
+    const companyNameDarkHTML = companyUrl ?
+        `<a href="${companyUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #f3f4f6; font-weight: 600;">${companyName}</a>` :
+        `<div style="color: #f3f4f6; font-weight: 600;">${companyName}</div>`;
+
     // Светлая тема
     const lightHtml = `
         <div style="display: flex; align-items: center; gap: 8px; font-size: ${fontSize}px;">
             ${logoHtml}
             <div style="display: flex; flex-direction: column; gap: 2px;">
                 ${poweredByText ? `<div style="color: #6b7280; font-size: ${fontSize - 2}px;">${poweredByText}</div>` : ''}
-                <div style="color: #1f2937; font-weight: 600;">${companyName}</div>
+                ${companyNameLightHTML}
             </div>
         </div>
     `;
@@ -5060,7 +5093,7 @@ window.updateBrandingPreview = function() {
             ${logoHtml}
             <div style="display: flex; flex-direction: column; gap: 2px;">
                 ${poweredByText ? `<div style="color: #9ca3af; font-size: ${fontSize - 2}px;">${poweredByText}</div>` : ''}
-                <div style="color: #f3f4f6; font-weight: 600;">${companyName}</div>
+                ${companyNameDarkHTML}
             </div>
         </div>
     `;
@@ -5079,7 +5112,8 @@ window.loadBrandingSettings = function() {
             icon: '🤖',
             imageUrl: '',
             companyName: 'NexusMindAI',
-            poweredByText: 'Powered by',
+            companyUrl: '',
+            poweredByText: '',
             size: {
                 logoWidth: 32,
                 logoHeight: 32,
@@ -5109,8 +5143,11 @@ window.loadBrandingSettings = function() {
     const brandingCompanyName = document.getElementById('brandingCompanyName');
     if (brandingCompanyName) brandingCompanyName.value = branding.companyName || 'NexusMindAI';
 
+    const brandingCompanyUrl = document.getElementById('brandingCompanyUrl');
+    if (brandingCompanyUrl) brandingCompanyUrl.value = branding.companyUrl || '';
+
     const brandingPoweredByText = document.getElementById('brandingPoweredByText');
-    if (brandingPoweredByText) brandingPoweredByText.value = branding.poweredByText || 'Powered by';
+    if (brandingPoweredByText) brandingPoweredByText.value = branding.poweredByText || '';
 
     if (branding.size) {
         const brandingLogoWidth = document.getElementById('brandingLogoWidth');
@@ -5151,6 +5188,9 @@ window.saveBrandingSettings = function() {
 
     const brandingCompanyName = document.getElementById('brandingCompanyName');
     if (brandingCompanyName) currentConfig.branding.companyName = brandingCompanyName.value;
+
+    const brandingCompanyUrl = document.getElementById('brandingCompanyUrl');
+    if (brandingCompanyUrl) currentConfig.branding.companyUrl = brandingCompanyUrl.value;
 
     const brandingPoweredByText = document.getElementById('brandingPoweredByText');
     if (brandingPoweredByText) currentConfig.branding.poweredByText = brandingPoweredByText.value;

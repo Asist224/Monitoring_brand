@@ -7475,13 +7475,21 @@ function createBrandingElement() {
     // Создаем HTML для текста
     const fontSize = (branding.size && branding.size.fontSize) || 12;
     const companyName = branding.companyName || 'NexusMindAI';
-    const poweredByText = branding.poweredByText || 'Powered by';
+    const companyUrl = (branding.companyUrl || '').trim();
+    const poweredByText = (branding.poweredByText || '').trim();
+
+    // Генерируем HTML для названия компании (с ссылкой или без)
+    const companyNameHTML = companyUrl ?
+        `<a href="${companyUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+            <span class="monitoring-branding-company">${companyName}</span>
+        </a>` :
+        `<div class="monitoring-branding-company">${companyName}</div>`;
 
     brandingContainer.innerHTML = `
         ${logoHtml}
         <div class="monitoring-branding-text" style="font-size: ${fontSize}px;">
             ${poweredByText ? `<div class="monitoring-branding-powered">${poweredByText}</div>` : ''}
-            <div class="monitoring-branding-company">${companyName}</div>
+            ${companyNameHTML}
         </div>
     `;
 
