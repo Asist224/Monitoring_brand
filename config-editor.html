@@ -3476,7 +3476,8 @@ window.updateBrandingPreview = function() {
     // Создаем HTML для логотипа
     let logoHtml = '';
     if (logoType === 'svg' && logoSvg) {
-        logoHtml = `<div style="width: ${logoWidth}px; height: ${logoHeight}px; flex-shrink: 0;">${logoSvg}</div>`;
+        // Обернем SVG в контейнер с overflow: hidden для предотвращения наложения
+        logoHtml = `<div style="width: ${logoWidth}px; height: ${logoHeight}px; flex-shrink: 0; overflow: hidden; display: flex; align-items: center; justify-content: center;"><div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">${logoSvg}</div></div>`;
     } else if (logoType === 'icon' && icon) {
         logoHtml = `<div style="font-size: ${logoHeight}px; line-height: 1; flex-shrink: 0;">${icon}</div>`;
     } else if (logoType === 'image' && imageUrl) {
@@ -5060,7 +5061,8 @@ window.updateBrandingPreview = function() {
     // Создаем HTML для логотипа
     let logoHtml = '';
     if (logoType === 'svg' && logoSvg) {
-        logoHtml = `<div style="width: ${logoWidth}px; height: ${logoHeight}px; flex-shrink: 0;">${logoSvg}</div>`;
+        // Обернем SVG в контейнер с overflow: hidden для предотвращения наложения
+        logoHtml = `<div style="width: ${logoWidth}px; height: ${logoHeight}px; flex-shrink: 0; overflow: hidden; display: flex; align-items: center; justify-content: center;"><div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">${logoSvg}</div></div>`;
     } else if (logoType === 'icon' && icon) {
         logoHtml = `<div style="font-size: ${logoHeight}px; line-height: 1; flex-shrink: 0;">${icon}</div>`;
     } else if (logoType === 'image' && imageUrl) {
