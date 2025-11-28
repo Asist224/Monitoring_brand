@@ -55,6 +55,7 @@
 
         .tabs {
             display: flex;
+            flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 30px;
             background: var(--white);
@@ -64,14 +65,15 @@
         }
 
         .tab {
-            padding: 12px 24px;
+            padding: 10px 18px;
             border: none;
             background: transparent;
             color: var(--dark);
-            font-size: 16px;
+            font-size: 14px;
             cursor: pointer;
             border-radius: 8px;
             transition: all 0.3s;
+            white-space: nowrap;
         }
 
         .tab.active {
@@ -1001,7 +1003,31 @@
     </div>
 
    <script>
-   
+
+   // Переключение вкладок - ГЛОБАЛЬНАЯ ФУНКЦИЯ (определена в начале для надёжности)
+window.switchTab = function(tabName) {
+    // Скрыть все вкладки
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+
+    // Показать выбранную вкладку
+    const tabContent = document.getElementById(`${tabName}-tab`);
+    if (tabContent) {
+        tabContent.classList.add('active');
+    }
+
+    // Найти и активировать кнопку вкладки
+    document.querySelectorAll('.tab').forEach(tab => {
+        if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes(tabName)) {
+            tab.classList.add('active');
+        }
+    });
+}
+
    // Переводы для страницы настроек
 const ConfigEditorTranslations = {
     ru: {
@@ -3399,30 +3425,6 @@ if (typeof MonitoringConfig === 'undefined') {
 
 // Текущая конфигурация
 let currentConfig = JSON.parse(JSON.stringify(MonitoringConfig));
-
-// Переключение вкладок - ГЛОБАЛЬНАЯ ФУНКЦИЯ
-window.switchTab = function(tabName) {
-    // Скрыть все вкладки
-    document.querySelectorAll('.tab-content').forEach(content => {
-        content.classList.remove('active');
-    });
-    document.querySelectorAll('.tab').forEach(tab => {
-        tab.classList.remove('active');
-    });
-    
-    // Показать выбранную вкладку
-    const tabContent = document.getElementById(`${tabName}-tab`);
-    if (tabContent) {
-        tabContent.classList.add('active');
-    }
-    
-    // Найти и активировать кнопку вкладки
-    document.querySelectorAll('.tab').forEach(tab => {
-        if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes(tabName)) {
-            tab.classList.add('active');
-        }
-    });
-}
 
 // Инициализация при загрузке
 document.addEventListener('DOMContentLoaded', function() {
