@@ -850,30 +850,6 @@
             </div>
         </div>
     </div>
-    
-    <div class="section" id="crmAutomationSection" style="display: none;">
-        <h2>🤖 Автоматизация</h2>
-        
-        <div class="form-group">
-            <label style="display: flex; align-items: center; gap: 10px;">
-                <input type="checkbox" id="crmAutoSend" style="width: auto;">
-                <span>Автоматически отправлять контакты в CRM</span>
-            </label>
-        </div>
-        
-        <div class="form-group">
-            <label>Минимальный Lead Score для автоотправки:</label>
-            <input type="number" class="form-control" id="crmMinLeadScore" min="0" max="100" value="70" step="10">
-            <small style="color: #6b7280;">Контакты с Lead Score выше этого значения будут отправлены автоматически</small>
-        </div>
-        
-        <div class="form-group">
-            <label style="display: flex; align-items: center; gap: 10px;">
-                <input type="checkbox" id="crmDuplicateCheck" style="width: auto;">
-                <span>Проверять дубликаты перед отправкой</span>
-            </label>
-        </div>
-    </div>
 </div>
 
 <!-- Вкладка: Брендирование -->
@@ -1190,12 +1166,7 @@ const ConfigEditorTranslations = {
             emailField: "Поле \"Email\" в CRM:",
             emailFieldPlaceholder: "email, email_address, mail и т.д.",
             companyField: "Поле \"Компания\" в CRM:",
-            companyFieldPlaceholder: "company, company_name, organization и т.д.",
-            automation: "🤖 Автоматизация",
-            autoSend: "Автоматически отправлять контакты в CRM",
-            minLeadScore: "Минимальный Lead Score для автоотправки:",
-            minLeadScoreHint: "Контакты с Lead Score выше этого значения будут отправлены автоматически",
-            duplicateCheck: "Проверять дубликаты перед отправкой"
+            companyFieldPlaceholder: "company, company_name, organization и т.д."
         },
         buttons: {
             save: "💾 Сохранить изменения",
@@ -1407,12 +1378,7 @@ const ConfigEditorTranslations = {
             emailField: "\"Email\" field in CRM:",
             emailFieldPlaceholder: "email, email_address, mail, etc.",
             companyField: "\"Company\" field in CRM:",
-            companyFieldPlaceholder: "company, company_name, organization, etc.",
-            automation: "🤖 Automation",
-            autoSend: "Automatically send contacts to CRM",
-            minLeadScore: "Minimum Lead Score for auto-send:",
-            minLeadScoreHint: "Contacts with Lead Score above this value will be sent automatically",
-            duplicateCheck: "Check for duplicates before sending"
+            companyFieldPlaceholder: "company, company_name, organization, etc."
         },
         buttons: {
             save: "💾 Save Changes",
@@ -1624,12 +1590,7 @@ const ConfigEditorTranslations = {
             emailField: "Campo \"Email\" en CRM:",
             emailFieldPlaceholder: "email, email_address, mail, etc.",
             companyField: "Campo \"Empresa\" en CRM:",
-            companyFieldPlaceholder: "company, company_name, organization, etc.",
-            automation: "🤖 Automatización",
-            autoSend: "Enviar contactos automáticamente a CRM",
-            minLeadScore: "Lead Score mínimo para envío automático:",
-            minLeadScoreHint: "Los contactos con Lead Score superior a este valor se enviarán automáticamente",
-            duplicateCheck: "Verificar duplicados antes de enviar"
+            companyFieldPlaceholder: "company, company_name, organization, etc."
         },
         buttons: {
             save: "💾 Guardar Cambios",
@@ -1841,12 +1802,7 @@ const ConfigEditorTranslations = {
             emailField: "Champ \"Email\" dans le CRM:",
             emailFieldPlaceholder: "email, email_address, mail, etc.",
             companyField: "Champ \"Entreprise\" dans le CRM:",
-            companyFieldPlaceholder: "company, company_name, organization, etc.",
-            automation: "🤖 Automatisation",
-            autoSend: "Envoyer automatiquement les contacts au CRM",
-            minLeadScore: "Lead Score minimum pour l'envoi automatique:",
-            minLeadScoreHint: "Les contacts avec un Lead Score supérieur à cette valeur seront envoyés automatiquement",
-            duplicateCheck: "Vérifier les doublons avant l'envoi"
+            companyFieldPlaceholder: "company, company_name, organization, etc."
         },
         buttons: {
             save: "💾 Enregistrer les Modifications",
@@ -2058,12 +2014,7 @@ const ConfigEditorTranslations = {
             emailField: "\"E-Mail\"-Feld im CRM:",
             emailFieldPlaceholder: "email, email_address, mail, usw.",
             companyField: "\"Unternehmen\"-Feld im CRM:",
-            companyFieldPlaceholder: "company, company_name, organization, usw.",
-            automation: "🤖 Automatisierung",
-            autoSend: "Kontakte automatisch an CRM senden",
-            minLeadScore: "Minimaler Lead Score für automatisches Senden:",
-            minLeadScoreHint: "Kontakte mit einem Lead Score über diesem Wert werden automatisch gesendet",
-            duplicateCheck: "Auf Duplikate prüfen vor dem Senden"
+            companyFieldPlaceholder: "company, company_name, organization, usw."
         },
         buttons: {
             save: "💾 Änderungen speichern",
@@ -2275,12 +2226,7 @@ const ConfigEditorTranslations = {
             emailField: "Campo \"Email\" nel CRM:",
             emailFieldPlaceholder: "email, email_address, mail, ecc.",
             companyField: "Campo \"Azienda\" nel CRM:",
-            companyFieldPlaceholder: "company, company_name, organization, ecc.",
-            automation: "🤖 Automazione",
-            autoSend: "Invia automaticamente i contatti al CRM",
-            minLeadScore: "Lead Score minimo per l'invio automatico:",
-            minLeadScoreHint: "I contatti con Lead Score superiore a questo valore verranno inviati automaticamente",
-            duplicateCheck: "Controlla duplicati prima dell'invio"
+            companyFieldPlaceholder: "company, company_name, organization, ecc."
         },
         buttons: {
             save: "💾 Salva Modifiche",
@@ -2492,12 +2438,7 @@ const ConfigEditorTranslations = {
             emailField: "Campo \"Email\" no CRM:",
             emailFieldPlaceholder: "email, email_address, mail, etc.",
             companyField: "Campo \"Empresa\" no CRM:",
-            companyFieldPlaceholder: "company, company_name, organization, etc.",
-            automation: "🤖 Automatização",
-            autoSend: "Enviar contactos automaticamente para o CRM",
-            minLeadScore: "Lead Score mínimo para envio automático:",
-            minLeadScoreHint: "Contactos com Lead Score acima deste valor serão enviados automaticamente",
-            duplicateCheck: "Verificar duplicados antes de enviar"
+            companyFieldPlaceholder: "company, company_name, organization, etc."
         },
         buttons: {
             save: "💾 Guardar Alterações",
@@ -2709,12 +2650,7 @@ const ConfigEditorTranslations = {
             emailField: "CRM中的\"邮箱\"字段：",
             emailFieldPlaceholder: "email、email_address、mail等",
             companyField: "CRM中的\"公司\"字段：",
-            companyFieldPlaceholder: "company、company_name、organization等",
-            automation: "🤖 自动化",
-            autoSend: "自动发送联系人到CRM",
-            minLeadScore: "自动发送的最低潜在客户评分：",
-            minLeadScoreHint: "评分高于此值的联系人将自动发送",
-            duplicateCheck: "发送前检查重复项"
+            companyFieldPlaceholder: "company、company_name、organization等"
         },
         buttons: {
             save: "💾 保存更改",
@@ -2926,12 +2862,7 @@ const ConfigEditorTranslations = {
             emailField: "CRMの「メール」フィールド：",
             emailFieldPlaceholder: "email、email_address、mailなど",
             companyField: "CRMの「会社」フィールド：",
-            companyFieldPlaceholder: "company、company_name、organizationなど",
-            automation: "🤖 自動化",
-            autoSend: "連絡先を自動的にCRMに送信",
-            minLeadScore: "自動送信の最小リードスコア：",
-            minLeadScoreHint: "この値を超えるリードスコアの連絡先は自動的に送信されます",
-            duplicateCheck: "送信前に重複をチェック"
+            companyFieldPlaceholder: "company、company_name、organizationなど"
         },
         buttons: {
             save: "💾 変更を保存",
@@ -3143,12 +3074,7 @@ const ConfigEditorTranslations = {
             emailField: "CRM의 \"이메일\" 필드:",
             emailFieldPlaceholder: "email, email_address, mail 등",
             companyField: "CRM의 \"회사\" 필드:",
-            companyFieldPlaceholder: "company, company_name, organization 등",
-            automation: "🤖 자동화",
-            autoSend: "연락처를 CRM으로 자동 전송",
-            minLeadScore: "자동 전송을 위한 최소 리드 스코어:",
-            minLeadScoreHint: "이 값보다 높은 리드 스코어를 가진 연락처는 자동으로 전송됩니다",
-            duplicateCheck: "전송 전 중복 확인"
+            companyFieldPlaceholder: "company, company_name, organization 등"
         },
         buttons: {
             save: "💾 변경 사항 저장",
@@ -3360,12 +3286,7 @@ const ConfigEditorTranslations = {
             emailField: "Поле \"Email\" в CRM:",
             emailFieldPlaceholder: "email, email_address, mail тощо",
             companyField: "Поле \"Компанія\" в CRM:",
-            companyFieldPlaceholder: "company, company_name, organization тощо",
-            automation: "🤖 Автоматизація",
-            autoSend: "Автоматично відправляти контакти в CRM",
-            minLeadScore: "Мінімальний Lead Score для автовідправки:",
-            minLeadScoreHint: "Контакти з Lead Score вище цього значення будуть відправлені автоматично",
-            duplicateCheck: "Перевіряти дублікати перед відправкою"
+            companyFieldPlaceholder: "company, company_name, organization тощо"
         },
         buttons: {
             save: "💾 Зберегти зміни",
@@ -3504,8 +3425,6 @@ function updatePageLanguage() {
             header.innerHTML = t('crm.mainSettings');
         } else if (parent.querySelector('#crmFieldName')) {
             header.innerHTML = t('crm.fieldMapping');
-        } else if (parent.querySelector('#crmAutoSend')) {
-            header.innerHTML = t('crm.automation');
         }
     });
     
@@ -3594,8 +3513,6 @@ function updatePageLanguage() {
             label.textContent = t('crm.emailField');
         } else if (input.id === 'crmFieldCompany') {
             label.textContent = t('crm.companyField');
-        } else if (input.id === 'crmMinLeadScore') {
-            label.textContent = t('crm.minLeadScore');
         }
     });
     
@@ -3671,29 +3588,13 @@ if (syncSection) {
     if (crmDesc) {
         crmDesc.textContent = t('crm.fieldMappingDesc');
     }
-    
-    // Обновляем подсказку для Lead Score
-    const leadScoreHint = document.querySelector('#crmMinLeadScore')?.parentElement?.querySelector('small');
-    if (leadScoreHint) {
-        leadScoreHint.textContent = t('crm.minLeadScoreHint');
-    }
-    
+
     // Обновляем чекбоксы
     const crmEnableLabel = document.querySelector('#crmEnabled')?.parentElement?.querySelector('span');
     if (crmEnableLabel) {
         crmEnableLabel.textContent = t('crm.enableIntegration');
     }
-    
-    const autoSendLabel = document.querySelector('#crmAutoSend')?.parentElement?.querySelector('span');
-    if (autoSendLabel) {
-        autoSendLabel.textContent = t('crm.autoSend');
-    }
-    
-    const duplicateCheckLabel = document.querySelector('#crmDuplicateCheck')?.parentElement?.querySelector('span');
-    if (duplicateCheckLabel) {
-        duplicateCheckLabel.textContent = t('crm.duplicateCheck');
-    }
-    
+
     // Обновляем чекбокс и надписи для Highlights
     const highlightsEnabledLabel = document.querySelector('#highlightsEnabled')?.parentElement?.querySelector('span');
     if (highlightsEnabledLabel) {
@@ -4649,12 +4550,10 @@ function toggleItem(containerId, key, toggleElement) {
 function toggleCRMSections() {
     const crmEnabled = document.getElementById('crmEnabled');
     const settingsContent = document.getElementById('crmSettingsContent');
-    const automationSection = document.getElementById('crmAutomationSection');
-    
-    if (crmEnabled && settingsContent && automationSection) {
+
+    if (crmEnabled && settingsContent) {
         const isEnabled = crmEnabled.checked;
         settingsContent.style.display = isEnabled ? 'block' : 'none';
-        automationSection.style.display = isEnabled ? 'block' : 'none';
     }
 }
 
@@ -4849,16 +4748,13 @@ function toggleCRMSections() {
     const crmEnabled = document.getElementById('crmEnabled');
     const crmSettingsContent = document.getElementById('crmSettingsContent');
     const crmMappingSection = document.getElementById('crmMappingSection');
-    const crmAutomationSection = document.getElementById('crmAutomationSection');
-    
+
     if (crmEnabled && crmEnabled.checked) {
         if (crmSettingsContent) crmSettingsContent.style.display = 'block';
         if (crmMappingSection) crmMappingSection.style.display = 'block';
-        if (crmAutomationSection) crmAutomationSection.style.display = 'block';
     } else {
         if (crmSettingsContent) crmSettingsContent.style.display = 'none';
         if (crmMappingSection) crmMappingSection.style.display = 'none';
-        if (crmAutomationSection) crmAutomationSection.style.display = 'none';
     }
 }
 
