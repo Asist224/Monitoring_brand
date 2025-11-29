@@ -5162,10 +5162,6 @@ if (crmEnabled) {
         
         if (result.success) {
             showSuccessMessage();
-            // Перезагружаем страницу через 1 секунду для обновления конфигурации
-setTimeout(() => {
-    window.location.reload(true); // true - игнорировать кеш
-}, 1000);
             localStorage.setItem('monitoringConfig', JSON.stringify(currentConfig));
             
             const reloadMessage = {
