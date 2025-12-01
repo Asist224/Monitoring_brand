@@ -4613,10 +4613,14 @@ function switchTableTab(tab) {
         document.getElementById('emailTableContainer').style.display = 'block';
         document.querySelector('[data-tab="email"]').classList.add('active');
         loadEmailData();
+        // Пересоздаем брендирование после переключения
+        setTimeout(() => createBrandingElement(), 100);
     } else {
         document.getElementById('messengersTableContainer').style.display = 'block';
         document.getElementById('emailTableContainer').style.display = 'none';
         document.querySelector('[data-tab="messengers"]').classList.add('active');
+        // Пересоздаем брендирование после переключения
+        setTimeout(() => createBrandingElement(), 100);
     }
 }
 
@@ -7444,15 +7448,9 @@ function createBrandingElement() {
 
     const branding = MonitoringConfig.branding;
 
-    // Удаляем старый элемент брендирования, если он существует
-    const existingBranding = document.querySelector('.monitoring-branding');
-    if (existingBranding) {
-        existingBranding.remove();
-    }
-
-    // Создаем контейнер для брендирования
-    const brandingContainer = document.createElement('div');
-    brandingContainer.className = 'monitoring-branding';
+    // Удаляем все старые элементы брендирования, если они существуют
+    const existingBrandings = document.querySelectorAll('.monitoring-branding');
+    existingBrandings.forEach(el => el.remove());
 
     // Создаем HTML для логотипа
     let logoHtml = '';
@@ -7485,7 +7483,7 @@ function createBrandingElement() {
         </a>` :
         `<div class="monitoring-branding-company">${companyName}</div>`;
 
-    brandingContainer.innerHTML = `
+    const brandingHTML = `
         ${logoHtml}
         <div class="monitoring-branding-text" style="font-size: ${fontSize}px;">
             ${poweredByText ? `<div class="monitoring-branding-powered">${poweredByText}</div>` : ''}
@@ -7493,14 +7491,22 @@ function createBrandingElement() {
         </div>
     `;
 
-    // Находим контейнер пагинации и добавляем брендирование
-    const paginationContainer = document.querySelector('.pagination');
-    if (paginationContainer) {
-        paginationContainer.appendChild(brandingContainer);
+    // Находим все контейнеры пагинации и добавляем брендирование в каждый
+    const paginationContainers = document.querySelectorAll('.pagination');
+    if (paginationContainers.length > 0) {
+        paginationContainers.forEach(paginationContainer => {
+            const brandingContainer = document.createElement('div');
+            brandingContainer.className = 'monitoring-branding';
+            brandingContainer.innerHTML = brandingHTML;
+            paginationContainer.appendChild(brandingContainer);
+        });
     } else {
         // Если контейнера пагинации нет, пытаемся добавить в конец таблицы
         const tableContainer = document.querySelector('.table-container');
         if (tableContainer) {
+            const brandingContainer = document.createElement('div');
+            brandingContainer.className = 'monitoring-branding';
+            brandingContainer.innerHTML = brandingHTML;
             tableContainer.appendChild(brandingContainer);
         }
     }
