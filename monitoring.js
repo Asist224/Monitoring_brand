@@ -7452,13 +7452,24 @@ function createBrandingElement() {
     const existingBrandings = document.querySelectorAll('.monitoring-branding');
     existingBrandings.forEach(el => el.remove());
 
+    // Создаем уникальный ID для градиентов SVG, чтобы избежать конфликтов
+    const uniqueId = 'brand_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+
     // Создаем HTML для логотипа
     let logoHtml = '';
     if (branding.logoType === 'svg' && branding.logoSvg) {
         const logoSize = branding.size || {};
         const width = logoSize.logoWidth || 32;
         const height = logoSize.logoHeight || 32;
-        logoHtml = `<div class="monitoring-branding-logo" style="width: ${width}px; height: ${height}px;">${branding.logoSvg}</div>`;
+
+        // Заменяем фиксированные ID градиентов на уникальные
+        let svgContent = branding.logoSvg
+            .replace(/id="brandGrad1"/g, `id="${uniqueId}_grad1"`)
+            .replace(/id="brandGrad2"/g, `id="${uniqueId}_grad2"`)
+            .replace(/url\(#brandGrad1\)/g, `url(#${uniqueId}_grad1)`)
+            .replace(/url\(#brandGrad2\)/g, `url(#${uniqueId}_grad2)`);
+
+        logoHtml = `<div class="monitoring-branding-logo" style="width: ${width}px; height: ${height}px;">${svgContent}</div>`;
     } else if (branding.logoType === 'icon' && branding.icon) {
         const logoSize = branding.size || {};
         const height = logoSize.logoHeight || 32;
