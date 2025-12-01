@@ -7504,6 +7504,8 @@ function createBrandingElement() {
 
     // Находим все контейнеры пагинации и добавляем брендирование в каждый
     const paginationContainers = document.querySelectorAll('.pagination');
+    let brandingAdded = false;
+
     if (paginationContainers.length > 0) {
         paginationContainers.forEach(paginationContainer => {
             const brandingContainer = document.createElement('div');
@@ -7511,8 +7513,46 @@ function createBrandingElement() {
             brandingContainer.innerHTML = brandingHTML;
             paginationContainer.appendChild(brandingContainer);
         });
-    } else {
-        // Если контейнера пагинации нет, пытаемся добавить в конец таблицы
+        brandingAdded = true;
+    }
+
+    // Проверяем, нужно ли добавить брендирование для email таблицы
+    const emailTableContainer = document.getElementById('emailTableContainer');
+    if (emailTableContainer && emailTableContainer.style.display !== 'none') {
+        // Ищем элемент email пагинации
+        const emailPageNumbers = document.getElementById('emailPageNumbers');
+        if (emailPageNumbers && !brandingAdded) {
+            // Ищем родительский контейнер пагинации
+            let emailPaginationContainer = emailPageNumbers.closest('.pagination');
+
+            if (!emailPaginationContainer) {
+                // Если нет родителя с классом .pagination, ищем просто родителя
+                emailPaginationContainer = emailPageNumbers.parentElement;
+            }
+
+            if (emailPaginationContainer) {
+                const brandingContainer = document.createElement('div');
+                brandingContainer.className = 'monitoring-branding';
+                brandingContainer.innerHTML = brandingHTML;
+
+                // Добавляем брендирование в конец контейнера пагинации
+                emailPaginationContainer.appendChild(brandingContainer);
+                brandingAdded = true;
+            }
+        }
+
+        // Если всё еще не добавлено, добавляем в конец emailTableContainer
+        if (!brandingAdded) {
+            const brandingContainer = document.createElement('div');
+            brandingContainer.className = 'monitoring-branding';
+            brandingContainer.innerHTML = brandingHTML;
+            emailTableContainer.appendChild(brandingContainer);
+            brandingAdded = true;
+        }
+    }
+
+    // Если брендирование еще не добавлено, пытаемся добавить в конец таблицы мессенджеров
+    if (!brandingAdded) {
         const tableContainer = document.querySelector('.table-container');
         if (tableContainer) {
             const brandingContainer = document.createElement('div');
